@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: microservices
+    image: micro
     container_name: app
     restart: unless-stopped
     tty: true
@@ -18,7 +18,7 @@ services:
       - ./:/var/www/html/
       - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
-      - app-network
+      - app-net
 
   #Nginx Service
   webserver:
@@ -33,7 +33,7 @@ services:
       - ./:/var/www/html/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
-      - app-network
+      - app-net
 
   #MySQL Service
   db:
@@ -44,7 +44,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laravel_web
+      MYSQL_DATABASE: admin
       MYSQL_ROOT_PASSWORD: 123
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
@@ -52,11 +52,11 @@ services:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
-      - app-network
+      - app-net
 
 #Docker Networks
 networks:
-  app-network:
+  app-net:
     driver: bridge
 #Volumes
 volumes:

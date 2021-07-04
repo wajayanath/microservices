@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MySQL - @localhost" uuid="ecd53017-07e6-4e4b-8933-1dad92afa148">
+    <data-source source="LOCAL" name="admin@localhost" uuid="b03cfa8e-f9f2-48a3-8ce0-f0d28a8e5ce2">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <remarks>docker</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/laravel_web</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/admin</jdbc-url>
     </data-source>
   </component>
 </project>

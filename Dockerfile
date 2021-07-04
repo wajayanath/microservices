@@ -33,13 +33,18 @@ RUN docker-php-ext-install gd
 # Install composer (php package manager)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Add user for laravel application
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
+
 # Copy existing application directory contents to the working directory
 COPY . /var/www/html
 
-# Assign permissions of the working directory to the www-data user
-RUN chown -R www-data:www-data \
-        /var/www/html/storage \
-        /var/www/html/bootstrap/cache
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www/html
+
+# Change current user to www
+USER www
 
 # Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
 EXPOSE 9000
