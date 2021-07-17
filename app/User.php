@@ -44,11 +44,6 @@ class User extends Authenticatable
 
    protected $guarded = ['id'];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
     ];
@@ -61,6 +56,11 @@ class User extends Authenticatable
     public function permissions()
     {
         return $this->role->permissions->pluck('name');
+    }
+
+    public function hasAccess($access)
+    {
+        return $this->permissions()->contains($access);
     }
 
 }
