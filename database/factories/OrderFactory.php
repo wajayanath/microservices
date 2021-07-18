@@ -10,5 +10,6 @@ $factory->define(\App\Order::class, function (Faker $faker) {
         'first_name' => $faker->firstName,
         'Last_name' => $faker->lastName,
         'email' => $faker->email,
+        'created_at' => $faker->dateTime,
     ];
 });
