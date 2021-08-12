@@ -3,15 +3,22 @@ import Register from '@/public/Register.vue';
 import Login from '@/public/Login.vue';
 import Secure from '@/secure/Secure.vue';
 import Dashboard from '@/secure/dashboard/Dashboard.vue';
+import Users from '@/secure/users/Users.vue';
+import UsersCreate from '@/secure/users/UsersCreate.vue';
+import UsersEdit from '@/secure/users/UsersEdit.vue';
 
 const routes: Array<RouteRecordRaw> = [
   { path: '/register',component: Register },
   { path: '/login',component: Login },
     {
-        path: '/',
+        path: '',
         component: Secure,
         children: [
-            { path: '', component: Dashboard }
+            { path: '/', redirect: '/dashboard' },
+            { path: '/dashboard', component: Dashboard },
+            { path: '/users', component: Users },
+            { path: '/users/create', component: UsersCreate },
+            { path: '/users/:id/edit', component: UsersEdit }
         ]
     }
 ]
