@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class  UserController extends Controller
 {
     public function index()
     {
-        \Gate::authorize('view', 'users');
+//        \Gate::authorize('view', 'users');
 
         $user = User::paginate();
 
@@ -24,7 +25,7 @@ class  UserController extends Controller
 
     public function show($id)
     {
-        \Gate::authorize('view', 'users');
+//        \Gate::authorize('view', 'users');
 
         $user = User::find($id);
 
@@ -33,7 +34,7 @@ class  UserController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-        \Gate::authorize('edit', 'users');
+//        \Gate::authorize('edit', 'users');
 
         $user = User::create($request->only('first_name','last_name','email', 'role_id') + [
             'password' => Hash::make(1234)
@@ -42,9 +43,9 @@ class  UserController extends Controller
         return response(new UserResource($user), Response::HTTP_CREATED);
     }
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        \Gate::authorize('edit', 'users');
+//        \Gate::authorize('edit', 'users');
 
         $user = User::find($id);
 
@@ -55,7 +56,7 @@ class  UserController extends Controller
 
     public function destroy($id)
     {
-        \Gate::authorize('edit', 'users');
+//        \Gate::authorize('edit', 'users');
 
         User::destroy($id);
 
