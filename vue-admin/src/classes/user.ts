@@ -6,7 +6,7 @@ export class  User implements  Entity {
     first_name:string;
     last_name:string;
     email:string;
-    role:Role;
+    role: Role;
     permissions: string[];
 
     constructor(id = 0, first_name = '', last_name = '',email = '', role = new Role(), permissions = []) {
