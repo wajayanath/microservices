@@ -28,25 +28,30 @@
             </tbody>
         </table>
     </div>
+    <Paginator :last-page="lastpage" @page-changed="load($event)"/>
 </template>
 
 <script lang="ts">
     import {ref, onMounted} from 'vue';
     import axios from  'axios';
     import {Entity} from "@/interfaces/entity";
+    import Paginator from "@/secure/components/Paginator.vue";
 
     export default {
         name: "products",
+        components: {Paginator},
         setup() {
             const products = ref([]);
+            const lastpage = ref(0);
 
-            onMounted(async () => {
-                const response = await axios.get('products');
+            const load = async (page = 1) => {
+                const response = await axios.get(`products?page=${page}`);
 
                 products.value = response.data.data;
+                lastpage.value = response.data.meta.last_page;
+            }
 
-
-            })
+            onMounted(load);
 
             const del = async (id:number) => {
                 if(confirm('Are you sure you want to delete this record')) {
@@ -57,7 +62,9 @@
 
             return {
                 products,
-                del
+                lastpage,
+                del,
+                load
             }
         }
     }
